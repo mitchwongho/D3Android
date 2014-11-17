@@ -34,9 +34,11 @@ var svg = d3.select("body").append("svg")
 
 svg.call(tip);
 
-d3.tsv("data.tsv", type, function(error, data) {
+//
+{
 
-  data = JSON.parse(Android.loadData());
+  // Load the graphs data by invoking the Java hook
+  var data = JSON.parse(Android.loadData());
 
   x.domain(data.map(function(d) { return d.letter; }));
   y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
@@ -67,7 +69,7 @@ d3.tsv("data.tsv", type, function(error, data) {
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
 
-});
+};
 
 function type(d) {
   d.frequency = +d.frequency;
